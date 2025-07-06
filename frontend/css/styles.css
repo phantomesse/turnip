@@ -1,0 +1,24 @@
+@import "constants/_colors.css";
+@import "constants/_fonts.css";
+
+html,
+body {
+  background: var(--bg-color);
+  color: var(--fg-color);
+  font-family: var(--body-font-family);
+  font-weight: var(--body-font-weight);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+}
