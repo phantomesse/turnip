@@ -1,0 +1,13 @@
+{
+  "name": "turnip",
+  "version": "1.0.0",
+  "description": "An AI-based book recommendation app.",
+  "license": "ISC",
+  "author": "Lauren Zou",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
