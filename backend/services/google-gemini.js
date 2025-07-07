@@ -1,10 +1,11 @@
+import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
 
 /** Max number of books to suggest. */
 const _MAX_BOOK_COUNT = 5;
 
-// The client gets the API key from the environment variable `GEMINI_API_KEY`.
-const ai = new GoogleGenAI({});
+dotenv.config();
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
 
 /**
  * @param {string} prompt

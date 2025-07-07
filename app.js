@@ -4,6 +4,7 @@ import getBook from "./backend/endpoints/get-book.js";
 import getBookTags from "./backend/endpoints/get-book-tags.js";
 import getUser from "./backend/endpoints/get-user.js";
 import suggestBooks from "./backend/endpoints/suggest-books.js";
+import addUser from "./backend/endpoints/add-user.js";
 
 const app = express();
 const port = 3000;
@@ -23,6 +24,18 @@ app.get("/api/get-book-tags/:title/:author", (request, response) => {
   const author = decodeURI(request.params.author);
 
   getBookTags(title, author).then((tags) => response.send(tags));
+});
+
+app.put("/api/add-user/:username", (request, response) => {
+  const username = request.params.username;
+
+  addUser(username).then((user) => response.send(user));
+});
+
+app.get("/api/get-user/:userid", (request, response) => {
+  const userId = request.params.userid;
+
+  getUser(userId).then((user) => response.send(user));
 });
 
 app.get("/api/suggest-books/:userid", (request, response) => {
