@@ -1,14 +1,25 @@
 import { GoogleGenAI } from "@google/genai";
 
+/** Max number of books to suggest. */
+const _MAX_BOOK_COUNT = 5;
+
 // The client gets the API key from the environment variable `GEMINI_API_KEY`.
 const ai = new GoogleGenAI({});
 
-async function main() {
+/**
+ * @param {string} prompt
+ * @param {Object} responseSchema
+ * @returns {Promise<string>} Gemini response
+ */
+export async function askGemini(prompt, responseSchema) {
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: "Explain how AI works in a few words",
+    contents: prompt,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema,
+    },
   });
-  console.log(response.text);
-}
 
-main();
+  return JSON.parse(response.text);
+}

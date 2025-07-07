@@ -1,6 +1,9 @@
 import express from "express";
-import findBook from "./backend/endpoints/find-book.js";
+import findBooks from "./backend/endpoints/find-books.js";
 import getBook from "./backend/endpoints/get-book.js";
+import getBookTags from "./backend/endpoints/get-book-tags.js";
+import getUser from "./backend/endpoints/get-user.js";
+import suggestBooks from "./backend/endpoints/suggest-books.js";
 
 const app = express();
 const port = 3000;
@@ -15,10 +18,25 @@ app.get("/api/get-book/:title/:author", (request, response) => {
   getBook(title, author).then((book) => response.send(book));
 });
 
+app.get("/api/get-book-tags/:title/:author", (request, response) => {
+  const title = decodeURI(request.params.title);
+  const author = decodeURI(request.params.author);
+
+  getBookTags(title, author).then((tags) => response.send(tags));
+});
+
+app.get("/api/suggest-books/:userid", (request, response) => {
+  const userId = request.params.userid;
+
+  getUser(userId).then((user) =>
+    suggestBooks(user).then((books) => response.send(books))
+  );
+});
+
 app.get("/api/find-book/:query", (request, response) => {
   const query = decodeURI(request.params.query);
 
-  findBook(query).then((books) => response.send(books));
+  findBooks(query).then((books) => response.send(books));
 });
 
 app.listen(port, () => {
